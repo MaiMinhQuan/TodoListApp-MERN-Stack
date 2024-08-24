@@ -8,3 +8,5 @@ export const StatusCode = {
   UNPROCESSABLE_ENTITY: 202,
   AUTH_ERROR: 203,
 };
+
+export const PORT = 8000;

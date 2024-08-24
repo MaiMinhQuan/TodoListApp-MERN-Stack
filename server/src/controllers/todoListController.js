@@ -8,7 +8,7 @@ export const getTodos = async (req, res) => {
       .select("-password")
       .populate("todos")
       .exec();
-
+    console.log("check req when getTodos: ", req);
     return res.json(jsonGenerate(StatusCode.SUCCESS, "Todo list: ", list));
   } catch (e) {
     return res.json(jsonGenerate(StatusCode.UNPROCESSABLE_ENTITY, "ERROR", e));

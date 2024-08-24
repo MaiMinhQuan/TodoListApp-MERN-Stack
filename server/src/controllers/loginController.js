@@ -38,6 +38,10 @@ const Login = async (req, res) => {
       jsonGenerate(StatusCode.SUCCESS, "Login successful", {
         userId: user._id,
         token: token,
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        password: password,
       })
     );
   }

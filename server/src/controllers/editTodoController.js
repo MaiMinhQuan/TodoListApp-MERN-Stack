@@ -1,10 +1,9 @@
 import { StatusCode } from "../utils/constants.js";
 import { jsonGenerate } from "../utils/helpers.js";
 import { validationResult } from "express-validator";
-import User from "../models/User.js";
 import Todo from "../models/Todo.js";
 
-export const createTodo = async (req, res) => {
+export const editTodo = async (req, res) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.json(
@@ -17,23 +16,19 @@ export const createTodo = async (req, res) => {
   }
 
   try {
-    const result = await Todo.create({
-      userId: req.userId,
-      title: req.body.title,
-      desc: req.body.desc,
-    });
-
-    console.log("Check when create: ", result);
+    const result = await Todo.updateOne(
+      {
+        _id: req.body.todo_id,
+      },
+      {
+        title: req.body.title,
+        desc: req.body.desc,
+      }
+    );
 
     if (result) {
-      const user = await User.findOneAndUpdate(
-        { _id: req.userId },
-        {
-          $push: { todos: result },
-        }
-      );
       return res.json(
-        jsonGenerate(StatusCode.SUCCESS, "Todo created successfully", result)
+        jsonGenerate(StatusCode.SUCCESS, "Todo updated successfully", result)
       );
     }
   } catch (e) {

@@ -23,7 +23,7 @@ export const removeTodo = async (req, res) => {
     });
 
     console.log("Check result when deleting: ", result);
-    // res.send(result);
+
     if (result) {
       const user = await User.findOneAndUpdate(
         {

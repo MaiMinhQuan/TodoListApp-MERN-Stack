@@ -48,6 +48,10 @@ const Register = async (req, res) => {
         jsonGenerate(StatusCode.SUCCESS, "Registration successful", {
           userId: result._id,
           token: token,
+          name: name,
+          email: email,
+          username: username,
+          password: password,
         })
       );
     } catch (e) {
